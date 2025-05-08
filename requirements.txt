@@ -1,0 +1,5 @@
+loguru==0.7.3
+Requests==2.32.3
+selenium==4.31.0
+webdriver_manager==4.0.2
+parsel
