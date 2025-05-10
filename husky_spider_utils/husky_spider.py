@@ -28,6 +28,8 @@ class HuskySpider:
             self.session = SeleniumSession(**selenium_session_kwargs)
         self.temp_folder_path = temp_folder_path
         self.download_folder_path = download_folder_path
+        self.config_filename = config_filename
+        self.config_folder_path = config_folder_path
         self.config: T = config_loder()
         self.init_config(is_need_config, config_loder, config_folder_path, config_filename)
         self.records: list = []
@@ -70,16 +72,17 @@ class HuskySpider:
         if not isinstance(config_loder, type) or not issubclass(config_loder, SpiderConfig):
             raise Exception("config_loder需要是或者继承SpiderConfig")
         if is_need_config:
-            default_version = self.config.configVersion
+            default_version = self.config.str_configVersion
             if not os.path.exists(os.path.join(config_folder_path, config_filename)):
-                os.makedirs(config_folder_path)
+                if not os.path.exists(config_folder_path):
+                    os.makedirs(config_folder_path)
                 self.config.fun_save_to_yml(config_folder_path, config_filename)
             self.config.fun_load_from_yml(config_folder_path, config_filename)
-            version = self.config.configVersion
+            version = self.config.str_configVersion
             if version != default_version:
                 shutil.move(os.path.join(config_folder_path, config_filename),
                             os.path.join(config_folder_path, f"old_{config_filename}"))
-                self.config.configVersion = default_version
+                self.config.str_configVersion = default_version
                 self.config.fun_save_to_yml(config_folder_path, config_filename)
                 logger.warning("配置文件版本不一致，已经覆盖最新版配置，请修改配文件!")
 
@@ -146,5 +149,3 @@ class HuskySpider:
         path = os.path.join(self.download_folder_path, filename)
         with open(path, "wb") as f:
             f.write(res.content)
-
-
