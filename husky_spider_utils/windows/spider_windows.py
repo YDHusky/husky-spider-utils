@@ -6,6 +6,8 @@ from husky_spider_utils.windows.pages.log_page import LogPage, windows_logger
 
 
 class SpiderWindows:
+    page: ft.Page
+
     def __init__(self, spider: HuskySpider, window_title="Husky Spider Utils"):
         self.window_title = window_title
         self.spider = spider
@@ -55,6 +57,7 @@ class SpiderWindows:
                 expand=True,
             )
         )
+        self.page = page
 
     def add_page(self, page, **kwargs):
         self.destinations.append(ft.NavigationRailDestination(

@@ -34,7 +34,8 @@ session.selenium_get("https://cn.bing.com")
 > 第三方基于该库实现的项目可以联系作者挂在本页
 
 ## 更新日志
-
+### 0.2.3
+- spiderWindows中添加对page的变量调用
 ### 0.2.2
 
 - 将windows由继承式改为变量式
