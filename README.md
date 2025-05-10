@@ -34,7 +34,11 @@ session.selenium_get("https://cn.bing.com")
 > 第三方基于该库实现的项目可以联系作者挂在本页
 
 ## 更新日志
-## 0.2.0
+### 0.2.1
+
+- 修复huskyspider实例化时的driverType[从配置文件获取]
+
+### 0.2.0
 
 - 使用flet实现通过配置类自动生成图形化界面
 
@@ -62,7 +66,7 @@ flet build windows --module-name test.py
 ```
 更多查看flet
 
-## 0.1.6
+### 0.1.6
 
 - 新增HuskySpider类
 - 封装配置文件加载

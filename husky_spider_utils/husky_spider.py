@@ -24,14 +24,15 @@ class HuskySpider:
                  download_folder_path="./download",
                  is_selenium_session=True,
                  **selenium_session_kwargs):
-        if is_selenium_session:
-            self.session = SeleniumSession(**selenium_session_kwargs)
+
         self.temp_folder_path = temp_folder_path
         self.download_folder_path = download_folder_path
         self.config_filename = config_filename
         self.config_folder_path = config_folder_path
         self.config: T = config_loder()
         self.init_config(is_need_config, config_loder, config_folder_path, config_filename)
+        if is_selenium_session:
+            self.session = SeleniumSession(driver_type=self.config.select_driverType, **selenium_session_kwargs)
         self.records: list = []
         self.init_temp_folder(temp_folder_path)
         self.init_download_folder(download_folder_path)
