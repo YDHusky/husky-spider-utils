@@ -61,6 +61,3 @@ class SpiderWindows(HuskySpider):
             **kwargs
         ))
         self.pages.append(page)
-
-    def show(self):
-        ft.app(self.main_window)

@@ -38,7 +38,29 @@ session.selenium_get("https://cn.bing.com")
 
 - 使用flet实现通过配置类自动生成图形化界面
 
-> 打包查看flet教程
+`test.py`
+```python
+from husky_spider_utils.config.spider_config import SpiderConfig
+
+from husky_spider_utils.windows.spider_windows import SpiderWindows
+
+
+class TestConfig(SpiderConfig):
+    str_configVersion = "1.1.1"
+    str_account_username = ""
+    str_account_password = ""
+
+
+app = SpiderWindows(config_loder=TestConfig, is_selenium_session=False)
+import flet as ft
+
+ft.app(app.main_window)
+```
+打包windows
+```bash
+flet build windows --module-name test.py
+```
+更多查看flet
 
 ## 0.1.6
 
