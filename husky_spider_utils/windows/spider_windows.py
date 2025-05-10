@@ -5,14 +5,14 @@ from husky_spider_utils.windows.pages.config_page import ConfigPage
 from husky_spider_utils.windows.pages.log_page import LogPage, windows_logger
 
 
-class SpiderWindows(HuskySpider):
-    def __init__(self, window_title="Husky Spider Utils", **kwargs):
-        super().__init__(**kwargs)
+class SpiderWindows:
+    def __init__(self, spider: HuskySpider, window_title="Husky Spider Utils"):
         self.window_title = window_title
+        self.spider = spider
         self.destinations = []
         self.pages = []
         self.log_page = LogPage(self.run)
-        self.config_page = ConfigPage(self.config, self.config_folder_path, self.config_filename)
+        self.config_page = ConfigPage(self.spider.config, self.spider.config_folder_path, self.spider.config_filename)
         self.add_page(self.log_page, icon=ft.Icons.HOME_OUTLINED, selected_icon=ft.Icons.HOME, label="首页")
         self.add_page(self.config_page, icon=ft.Icons.SETTINGS_OUTLINED, selected_icon=ft.Icons.SETTINGS, label="配置")
 
